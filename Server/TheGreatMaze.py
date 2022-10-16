@@ -40,7 +40,7 @@ def start_game(start):
             for i in range(len(accel)):
                 accel[i] /= 16384.0
             emit('accel_data', accel)
-            time.sleep(1)
+            time.sleep(1/60)
 
 
 if __name__ == '__main__':
