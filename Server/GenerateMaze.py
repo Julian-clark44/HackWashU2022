@@ -117,4 +117,4 @@ def generateEdges(maze):
             edgeToAdd = Edge(cell.x+1, cell.y, cell.x+1, cell.y+1)
             if not arrayContains(trueEdges, edgeToAdd): 
                 trueEdges.append(edgeToAdd)
-    return trueEdges
+    return trueEdges 
