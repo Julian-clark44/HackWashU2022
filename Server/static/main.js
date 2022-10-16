@@ -5,7 +5,7 @@ game.margin = {top: 50, right: 50, bottom: 50, left: 50}
 game.svgWidth = game.size - game.margin.left - game.margin.right;
 game.svgHeight = game.size - game.margin.top - game.margin.bottom;
 game.tile_size = game.svgWidth / game.dimensions;
-
+game.time = getTime();
 
 svg = d3.select("#gameDiv")
   .append("svg")
@@ -21,7 +21,52 @@ maze = svg.append("g")
   .attr("transform", "translate(" + game.margin.left + ", " + game.margin.top + ")")
 
 
+var x = 0;
+var y = 0;
+var vx = 0;
+var vy = 0;
+var ax = 0;
+var ay = 0;
+
+function getVx(dt) {
+  ax = accel[0] - ax * .4;
+  vx += dt * ax;
+}
+
+function getVy(dt) {
+  ay = accel[1] - ay * .4;
+  vy += dt * ay;
+}
+
+function getX(dt) {
+  x += dt * getVx(dt);
+}
+
+function getY(dt) {
+  y += dt * getVy(dt);
+}
+function getPosition(dt) {
+  getX();
+  getY();
+  game.time() = t1;
+}
+
 var socket = io();
+socket.on('connect', function () {
+  socket.emit('transmit', 1);
+});
+
+socket.on('accel_data', function (accel) {
+  console.log(accel);
+  t1.getTime();
+  getPosition(t1 - game.time());
+});
+
+
+
+  
+
+/*var socket = io();
 
 socket.on('connect', function() {
   socket.emit('start game', 1);
@@ -34,7 +79,7 @@ socket.on('accel_data', function(accel){
 socket.on('edges_data', function(edges){
   game.edges = edges
   updateEdges()
-});
+});*/
 
 
 function updateEdges(){
