@@ -1,6 +1,6 @@
 from random import choice
 
-# citation: https://www.youtube.com/watch?v=Ez7U6jU0q5k
+# citation for maze generation: https://www.youtube.com/watch?v=Ez7U6jU0q5k
 
 cols, rows = 8, 8
 
@@ -78,6 +78,43 @@ def generate_maze():
             current_cell = array.pop()
     return grid_cells
 
-gc = generate_maze()
-for cell in gc:
-    print(cell.toString())
+class Edge: 
+    def __init__(self, x1, y1, x2, y2): 
+        self.x1, self.y1, self.x2, self.y2 = x1, y1, x2, y2
+    
+    def equals(self, otherEdge): 
+        return self.x1 == otherEdge.x1 and self.y1 == otherEdge.y1 and self.x2 == otherEdge.x2 and self.y2 == otherEdge.y2
+
+    def toString(self): 
+        return "(x1, y1): ({}, {})   (x2, y2): ({}, {})".format(self.x1, self.y1, self.x2, self.y2)
+
+def generateEdges(maze): 
+    trueEdges = []
+
+    def arrayContains(edgeArray, edgeToAdd): 
+        for e in edgeArray: 
+            if e.equals(edgeToAdd): 
+                return True
+        return False
+
+    for cell in maze:
+        if cell.walls["top"]: 
+            edgeToAdd = Edge(cell.x, cell.y, cell.x+1, cell.y)
+            if not arrayContains(trueEdges, edgeToAdd): 
+                trueEdges.append(edgeToAdd)
+
+        if cell.walls["bottom"]: 
+            edgeToAdd = Edge(cell.x, cell.y+1, cell.x+1, cell.y+1)
+            if not arrayContains(trueEdges, edgeToAdd): 
+                trueEdges.append(edgeToAdd)
+        
+        if cell.walls["left"]: 
+            edgeToAdd = Edge(cell.x, cell.y, cell.x, cell.y+1)
+            if not arrayContains(trueEdges, edgeToAdd): 
+                trueEdges.append(edgeToAdd)
+
+        if cell.walls["right"]: 
+            edgeToAdd = Edge(cell.x+1, cell.y, cell.x+1, cell.y+1)
+            if not arrayContains(trueEdges, edgeToAdd): 
+                trueEdges.append(edgeToAdd)
+    return trueEdges
