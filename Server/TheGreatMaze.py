@@ -26,9 +26,13 @@ def index():
 def home():
     return render_template('game.html')
 
-@app.route('/end')
-def end():
-    return render_template('end.html')
+@app.route('/winner')
+def winner():
+    return render_template('winner.html')
+
+@app.route('/loser')
+def loser():
+    return render_template('loser.html')
 
 
 @socketio.on('start game')
