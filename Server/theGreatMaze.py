@@ -17,8 +17,17 @@ def setup():
 
 
 @app.route('/')
+@app.route('/home')
 def index():
-    return render_template('index.html')
+    return render_template('home.html')
+
+@app.route('/game')
+def home():
+    return render_template('game.html')
+
+@app.route('/end')
+def end():
+    return render_template('end.html')
 
 
 @socketio.on('transmit')

@@ -1,16 +1,16 @@
 h1 {
-    text-align: center;
-    
-    font-family: Arial, sans-serif;
-    font-size: 4em;
-    font-weight: bold;
-    position: relative;
-    z-index: 1;
-    display: inline-block;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  
+  font-family: Arial, sans-serif;
+  font-size: 4em;
+  font-weight: bold;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
-    transform: scale(1, 1.5);
+  transform: scale(1, 1.5);
   -webkit-transform: scale(1, 1.5);
   -moz-transform: scale(1, 1.5);
   -o-transform: scale(1, 1.5);
