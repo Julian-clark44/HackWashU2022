@@ -88,8 +88,13 @@ class Edge:
     def toString(self): 
         return "(x1, y1): ({}, {})   (x2, y2): ({}, {})".format(self.x1, self.y1, self.x2, self.y2)
 
-def generateEdges(maze): 
-    trueEdges = []
+    def toArray(self):
+        return [[self.x1, self.y1], [self.x2, self.y2]]
+
+def generateEdges(): 
+    maze = generate_maze()
+    
+    edges = []
 
     def arrayContains(edgeArray, edgeToAdd): 
         for e in edgeArray: 
@@ -100,21 +105,25 @@ def generateEdges(maze):
     for cell in maze:
         if cell.walls["top"]: 
             edgeToAdd = Edge(cell.x, cell.y, cell.x+1, cell.y)
-            if not arrayContains(trueEdges, edgeToAdd): 
-                trueEdges.append(edgeToAdd)
+            if not arrayContains(edges, edgeToAdd): 
+                edges.append(edgeToAdd)
 
         if cell.walls["bottom"]: 
             edgeToAdd = Edge(cell.x, cell.y+1, cell.x+1, cell.y+1)
-            if not arrayContains(trueEdges, edgeToAdd): 
-                trueEdges.append(edgeToAdd)
+            if not arrayContains(edges, edgeToAdd): 
+                edges.append(edgeToAdd)
         
         if cell.walls["left"]: 
             edgeToAdd = Edge(cell.x, cell.y, cell.x, cell.y+1)
-            if not arrayContains(trueEdges, edgeToAdd): 
-                trueEdges.append(edgeToAdd)
+            if not arrayContains(edges, edgeToAdd): 
+                edges.append(edgeToAdd)
 
         if cell.walls["right"]: 
             edgeToAdd = Edge(cell.x+1, cell.y, cell.x+1, cell.y+1)
-            if not arrayContains(trueEdges, edgeToAdd): 
-                trueEdges.append(edgeToAdd)
-    return trueEdges 
+            if not arrayContains(edges, edgeToAdd): 
+                edges.append(edgeToAdd)
+
+    for i in range(len(edges)):
+        edges[i] = edges[i].toArray()
+    
+    return edges

@@ -1,5 +1,6 @@
 from flask import Flask, render_template
-from flask_socketio import SocketIO, send, emit
+from flask_socketio import SocketIO, emit
+from GenerateMaze import generateEdges
 import MPU6050 
 import time
 
@@ -30,9 +31,10 @@ def end():
     return render_template('end.html')
 
 
-@socketio.on('transmit')
-def handle_transmission(transmit):
-    if(transmit == 1):
+@socketio.on('start game')
+def start_game(start):
+    if(start == 1):
+        emit('edges_data', generateEdges())
         while(True):
             accel = mpu.get_acceleration()
             for i in range(len(accel)):
