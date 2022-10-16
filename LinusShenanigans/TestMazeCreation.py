@@ -1,6 +1,7 @@
 from GenerateMaze import *
 
 maze = generate_maze()
+maze[len(maze)-20].setGoalSquare()
 pygame.init()
 
 RES = 802, 602
@@ -14,7 +15,7 @@ pygame.display.update()
 
 open = True
 while open: 
-    sc.fill(pygame.Color('darkslategray'))
+    sc.fill(pygame.Color('black'))
     for event in pygame.event.get(): 
         if event.type == pygame.QUIT: 
             open = False

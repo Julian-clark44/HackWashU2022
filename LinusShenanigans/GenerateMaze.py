@@ -3,7 +3,7 @@ from pygame.locals import *
 from random import choice, randrange
 
 RES = WIDTH, HEIGHT = 800, 600
-TILE = 50
+TILE = 15
 cols, rows = WIDTH // TILE, HEIGHT // TILE
 
 class Cell:
